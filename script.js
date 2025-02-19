@@ -14,11 +14,11 @@ littleWomen = new Book('Little Women', 'Louisa May Alcott', 777);
 theCatcherInTheRye = new Book('The Catcher in the Rye', 'J.D. Salinger', 277);
 
 
-let cardContainer = document.querySelector('.cardContainer');
+const cardContainer = document.querySelector('.cardContainer');
 
 function displayLibrary() {
     cardContainer.innerHTML = '';
-    myLibrary.forEach(book => {
+    myLibrary.forEach((book, index) => {
         let bookCard = document.createElement('div');
         bookCard.classList.add('book-card');
         cardContainer.appendChild(bookCard);
@@ -41,7 +41,8 @@ function displayLibrary() {
         bookCard.appendChild(removeButton);
 
         removeButton.addEventListener('click', () => {
-            cardContainer.removeChild(bookCard);
+            myLibrary.splice(index, 1);
+            displayLibrary();
         });
 
         let readButton = document.createElement('button');
@@ -63,15 +64,21 @@ Book.prototype.toggleRead = function() {
 }
 
 function addBookToLibrary() {
-    let newBook = new Book();
-    let addBookButton = document.querySelector('#addBook');
-    addBookButton.addEventListener('click', () => {
-        newBook.title = document.querySelector('#title').value;
-        newBook.author = document.querySelector('#author').value;
-        newBook.pages = document.querySelector('#pages').value;
-        myLibrary.push(newBook);
-        cardContainer.innerHTML = '<div class="sidebar">Sidebar content here</div>';
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const pages = document.querySelector('#pages').value;
+
+    if (title && author && pages) {
+        new Book(title, author, pages);
         displayLibrary();
-    });
+        clearForm();
+    }
 }
-addBookToLibrary();
+
+function clearForm() {
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#pages').value = '';
+}   
+
+document.querySelector('#addBook').addEventListener('click', addBookToLibrary);
