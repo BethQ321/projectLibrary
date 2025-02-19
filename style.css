@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.libraryName {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 1rem;
+    padding: 1rem;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: 300px repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1rem;
+}
+
+.sidebar {
+    background-color: lightblue;
+    color: black;
+    padding: 1rem;
+    grid-row: 1 / -1;
+}
+
+.book-card {
+    background-color: #f9f9f9;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
